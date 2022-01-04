@@ -53,7 +53,7 @@ async fn main() {
         
         // Force login
         true
-    ).await;
+    ).await.unwrap();
 
     println!("Result: {:?}", res);
 }

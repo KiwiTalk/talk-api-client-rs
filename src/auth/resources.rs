@@ -11,7 +11,7 @@ use crate::credential::TalkAuthCredential;
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LoginData {
     #[serde(rename = "userId")]
-    pub user_id: u64,
+    pub user_id: i64,
 
     #[serde(rename = "countryIso")]
     pub country_iso: String,
@@ -19,9 +19,9 @@ pub struct LoginData {
     pub country_code: String,
 
     #[serde(rename = "accountId")]
-    pub account_id: u64,
+    pub account_id: i64,
 
-    pub server_time: u64,
+    pub server_time: i64,
 
     #[serde(rename = "resetUserData")]
     pub reset_user_data: bool,

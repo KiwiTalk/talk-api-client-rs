@@ -86,7 +86,7 @@ impl<Xvc: XVCHasher> TalkAuthClient<Xvc> {
     fn hash_auth_xvc(&self, user_agent: &str, email: &str) -> String {
         let full_hash = self
             .xvc_hasher
-            .full_xvc_hash(&self.config.device.uuid, user_agent, email);
+            .full_xvc_hash(&self.config.device.uuid_base64, user_agent, email);
 
         hex::encode(&full_hash[..8])
     }
@@ -95,7 +95,7 @@ impl<Xvc: XVCHasher> TalkAuthClient<Xvc> {
         AuthRequestForm {
             email,
             password,
-            device_uuid: &self.config.device.uuid,
+            device_uuid: &self.config.device.uuid_base64,
             device_name: &self.config.device.name,
             model_name: self.config.device.model.as_deref(),
         }
@@ -243,18 +243,18 @@ impl AuthClientConfig<'static> {
 pub struct AuthDeviceConfig<'a> {
     pub name: Cow<'a, str>,
     pub model: Option<Cow<'a, str>>,
-    pub uuid: Cow<'a, str>,
+    pub uuid_string_base64: Cow<'a, str>,
 }
 
 impl<'a> AuthDeviceConfig<'a> {
     pub const fn new(name: Cow<'a, str>, model: Option<Cow<'a, str>>, uuid: Cow<'a, str>) -> Self {
-        Self { name, uuid, model }
+        Self { name, uuid_base64: uuid, model }
     }
 
     pub const fn new_pc(name: Cow<'a, str>, uuid: Cow<'a, str>) -> Self {
         Self {
             name,
-            uuid,
+            uuid_base64: uuid,
             model: None,
         }
     }
@@ -264,7 +264,7 @@ impl AuthDeviceConfig<'static> {
     pub const fn new_const_pc(name: &'static str, uuid: &'static str) -> Self {
         Self {
             name: Cow::Borrowed(name),
-            uuid: Cow::Borrowed(uuid),
+            uuid_base64: Cow::Borrowed(uuid),
             model: None,
         }
     }
