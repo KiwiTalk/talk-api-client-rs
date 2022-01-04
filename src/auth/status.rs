@@ -10,6 +10,7 @@ use serde_repr::*;
 #[repr(i32)]
 #[derive(Copy, Clone, Debug, PartialEq, Serialize_repr, Deserialize_repr)]
 pub enum Status {
+	Success = 0,
 	InvalidPhoneNumber = 1,
 	SuccessWithAccount = 10,
 	SuccessWithDeviceChanged = 11,
