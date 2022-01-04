@@ -5,10 +5,11 @@
  */
 
 use serde::{Serialize, Deserialize};
+use crate::auth::Status;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TalkStatusResponse<T> {
-    pub status: i32,
+    pub status: Status,
 
     #[serde(flatten, skip_serializing_if = "Option::is_none")]
     pub data: Option<T>
