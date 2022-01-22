@@ -5,13 +5,14 @@
  */
 
 use serde::{Deserialize, Serialize};
+use talk_loco_client::structs::ids::UserId;
 
 use crate::credential::TalkAuthCredential;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LoginData {
     #[serde(rename = "userId")]
-    pub user_id: i64,
+    pub user_id: UserId,
 
     #[serde(rename = "countryIso")]
     pub country_iso: String,

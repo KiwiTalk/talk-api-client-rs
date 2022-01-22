@@ -12,6 +12,7 @@ sha2 = "0.9.8"
 hex = "0.4.3"
 serde = { version = "1.0.130", features = ["derive"] }
 serde_repr = "0.1"
+talk-loco-client = { path = "../talk-loco-client-rs" }
 
 
 [dev-dependencies]
